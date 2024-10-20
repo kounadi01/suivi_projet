@@ -1,0 +1,102 @@
+
+/* Listing Section
+--------------------------------*/
+#listing {
+  /* background: #fff;*/
+  padding: 60px 0;
+}
+
+#listing .item {
+    text-align: center;
+    margin-bottom: 20px;
+    background: #e7e7e7;
+    position: relative;
+    padding: 10px;
+    height: 100%;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+#listing .row [class*="col-"] {
+    margin:6px 0px;
+}
+
+#listing .item .item-info {
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: 0.2s;
+}
+
+#listing .item .item-info-content {
+  margin-top: -50px;
+  transition: margin 0.2s;
+}
+
+#listing .item:hover .item-info {
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  transition: 0.4s;
+}
+
+#listing .item:hover .item-info-content {
+  margin-top: 0;
+  transition: margin 0.4s;
+}
+
+#listing .item h4 ,#listing .item h4 a {
+  font-weight: 700;
+  margin-bottom: 2px;
+  font-size: 16px;
+  color: #110;
+}
+
+#listing .item span {
+  font-style: italic;
+  display: block;
+  font-size: 13px;
+  color: #110;
+}
+
+#listing .item .social {
+  margin-top: 15px;
+}
+
+#listing .item .social a {
+  transition: none;
+  color: #fff;
+}
+
+#listing .item .social a:hover {
+  color: #18d26e;
+}
+
+#listing .item .social i {
+  font-size: 70px;
+  margin: 0 2px;
+}
+
+#listing .item img {
+    position: relative;
+    width: 40%;
+    padding: 5px 5px 10px;
+}
+
+.widget img.pull-left {
+  float: left;
+  margin: 0 15px 15px 0;
+  width:55px;
+  height: auto;
+}
+
+ul.recent li h6 {
+  margin: 8px 0 2px 0;
+}
+
+

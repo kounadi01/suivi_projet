@@ -1,0 +1,32 @@
+SELECT
+    u.id AS student_id,
+    u.firstname AS first_name,
+    u.lastname AS last_name,
+    c.fullname AS course_name,
+    gg.finalgrade AS grade,
+    se.sessionstart AS session_start,
+    se.sessionend AS session_end,
+    f.name AS filiere_name,
+    n.name AS niveau_name
+FROM
+    mdl_user u
+INNER JOIN
+    mdl_user_enrolments ue ON u.id = ue.userid
+INNER JOIN
+    mdl_enrol e ON ue.enrolid = e.id
+INNER JOIN
+    mdl_course c ON e.courseid = c.id
+INNER JOIN
+    mdl_grade_items gi ON c.id = gi.courseid
+INNER JOIN
+    mdl_grade_grades gg ON gi.id = gg.itemid AND gg.userid = u.id
+INNER JOIN
+    mdl_sessions se ON u.id = se.userid
+INNER JOIN
+    mdl_filiere f ON c.filiereid = f.id
+INNER JOIN
+    mdl_niveau n ON c.niveauid = n.id
+WHERE
+    se.sessionstart >= 'YYYY-MM-DD' AND se.sessionend <= 'YYYY-MM-DD'
+    AND f.name = 'Nom de la filière'
+    AND n.name = 'Nom du niveau';

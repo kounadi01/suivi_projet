@@ -1,0 +1,17 @@
+# Données des points à afficher sur la carte
+points = [
+    {"lat": 48.8566, "lng": 2.3522, "name": "Paris"},
+    {"lat": 51.5074, "lng": -0.1278, "name": "Londres"},
+    {"lat": 40.7128, "lng": -74.0060, "name": "New York"}
+]
+
+@app.route('/')
+def index():
+    # Clé API Google Maps
+    api_key = 'VOTRE_CLE_API'
+
+    return render_template('index.html', api_key=api_key)
+
+@app.route('/points')
+def get_points():
+    return jsonify(points)

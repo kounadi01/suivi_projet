@@ -1,0 +1,521 @@
+/*
+    Theme Name: Sailor
+    Theme URL: https://bootstrapmade.com/sailor-free-bootstrap-theme/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+*/
+
+/* === prettify === */
+@import url('../js/google-code-prettify/prettify.css');
+/* === fontawesome === */
+@import url('lib/font-awesome/css/font-awesome.min.css');
+/* === custom icon === */
+@import url('custom-fonts.css');
+/* ==== overwrite bootstrap standard ==== */
+@import url('theme.css');
+@import url('animate.css');
+
+
+/* ===============================
+# Blog & article
+================================ */
+
+ul.recent li h6 {
+    margin: 0 0 10px 0;
+}
+
+ul.recent li h6 a {
+    color: #353535;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+ul.cat li i {
+    margin-right: 10px;
+}
+
+ul.cat li a, ul.folio-detail li a {
+    color: #656565;
+}
+
+ul.cat li:hover a, ul.folio-detail li:hover a {
+	color: #081e5a;
+	font-weight: bold;
+}
+
+h5.widgetheading {
+    font-size: 20px;
+}
+
+.widgetheading {
+    width: 100%;
+    padding: 0;
+}
+
+.widget ul.recent li {
+    margin-bottom: 20px;
+}
+
+.widget ul.recent li {
+    display: inline-block;
+}
+.widget img.pull-left {
+    float: left;
+    margin: 0 15px 15px 0;
+}
+
+.widget ul.tags {
+    list-style: none;
+    margin: 0;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.widget ul.tags li {
+    margin: 0 5px 15px 0;
+    display: inline-block;
+}
+
+.widget ul.tags li a {
+    background: #e6e6e6;
+    color: #333;
+    padding: 5px 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #888;
+}
+
+.widget ul.tags li a:hover {
+    background: #081e5a;
+}
+
+.widget ul.tags li a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+article{
+	margin-bottom:50px;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 30px;
+}
+
+article p{
+	text-align:justify;
+}
+article .post-heading h3 {
+	margin-bottom:20px;
+}
+
+article .post-heading h3 a {
+	font-weight:700;
+	color:#353535;
+}
+
+article .post-sub-heading{
+	font-weight: 500;
+	letter-spacing: 0.6px;
+	padding-left:10px;
+	border-left: 4px solid #18d26e;
+	padding-top: 5px;
+	margin-top:20px;
+	padding-bottom: 5px;
+	background-color: #f7f7f7;
+}
+
+article .post-heading h3 a:hover {
+	text-decoration:none;	
+	color: #18d26e;
+}
+
+.searchtitle {
+	border-bottom: 1px dotted #eee;
+}
+
+
+/* --- post meta --- */
+.post-meta {
+	background:#fcfcfc;
+	border-top:none;
+	text-align:center;
+}
+
+.post-meta .format {
+	padding:10px 0 10px;
+}
+
+.post-meta i{
+	margin:0;
+}
+
+.post-meta .date {
+	padding:10px 0 10px;
+}
+
+.post-meta .date span {
+	text-align:center;
+	color:#999;
+	font-size:12px;
+	font-weight:600;
+}
+
+.post-meta .comments {
+	padding:10px 0 10px;
+}
+
+.post-meta .comments a {
+	color:#999;
+	font-size:12px;
+	font-weight:700;
+}
+
+.post-meta .comments a:hover {
+	text-decoration:none;
+}
+
+a.readmore {
+	font-weight: 600;
+	font-size: 13px;
+}
+
+/* --- post format --- */
+
+.post-image {
+	margin-bottom:20px;
+}
+
+.post-quote {
+	margin-bottom:20px;
+}
+
+.post-video {
+	margin-bottom:20px;
+}
+
+.post-audio {
+	margin-bottom:20px;
+}
+
+.post-link {
+	margin-bottom:20px;
+}
+
+.post-slider {
+	margin-bottom:20px;
+}
+
+/* post-slider */
+
+.postslider {
+	margin-bottom: 50px;
+}
+
+.postslider.flexslider { margin: 0 0 60px; background: #fff; border: none;
+-webkit-border-radius: 0; -moz-border-radius: 0; -o-border-radius: 0; border-radius: 0; -webkit-box-shadow: none; -moz-box-shadow: none; 
+-o-box-shadow: none;
+box-shadow: none;
+}
+.postslider  .flex-direction-nav a:before  { 
+	font-family: "flexslider-icon"; 
+	font-size: 20px; 
+	display: inline-block; 
+	content: '\f001'; 
+}
+.postslider  .flex-direction-nav a.flex-next:before  { content: '\f002'; }
+
+/* quote post */
+.post-quote blockquote {
+	font-size:16px;
+	color:#999;
+	font-family:'Roboto', sans-serif;
+	font-style:italic;
+	line-height:1.6em;
+}
+
+.post-quote blockquote i {
+	font-size: 40px;
+	margin:0 20px 10px 0;
+	float: left;
+	color: #eee;
+}
+
+.post-image img{
+	width:100%;
+	position:relative;
+}
+
+.post-image img:hover {
+  -webkit-box-shadow: 0 0 2px #979797;
+     -moz-box-shadow: 0 0 2px #979797;
+          box-shadow: 0 0 2px #979797;	
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+
+ul.meta-post{
+	margin: 0;
+	padding:0;
+	list-style:none;
+}
+
+ul.meta-post li{
+	display: inline-block;
+	margin:0 10px 0 10px;
+	padding:0;
+	list-style:none;
+	padding-right:10px;
+}
+
+ul.meta-post li i {
+	float:left;
+	font-size:12px;
+	margin:6px 5px 0 0;
+}
+
+ul.meta-post li a{
+	color:#999;
+	font-size:12px;
+	font-weight:600;
+}
+
+.contain-post .post-image img{
+	max-width: 250px;
+	min-width: 150px;
+	height: auto;
+}
+
+.contain-post .bottom-article{
+	margin-top:0px;
+}
+
+.contain-post .bottom-article .meta-post li {
+	margin: 0 10px 0 0px;
+}
+
+ul.recent p.meta-post a{
+		color: #999;
+		font-size: 12px;
+		font-weight: 600;	
+}
+
+ul.recent p.meta-post span i {
+    float: left;
+    font-size: 12px;
+    margin: 6px 5px 0 0;
+}
+
+/* --- single post --- */
+.bottom-article{
+	overflow: hidden;
+	padding:10px 0 10px 0;
+	margin-top:20px;
+}
+
+/* --- author info --- */
+
+.about-author {
+	border:1px solid #f5f5f5;
+	padding:20px;
+	float:left;
+	margin-bottom:5px;
+}
+
+.about-author h5 {
+	margin-bottom:10px;
+}
+
+
+
+/* --- Comment --- */
+
+.comment-area {
+	float:left;
+	width:100%;
+	margin-top:30px;	
+}
+
+.comment-area:after {
+	  display: table;
+  content: " ";
+
+}
+
+.media-content{
+	overflow:hidden;
+	margin-left:12px;
+	border-bottom:1px dotted #d5d5d5;
+	padding-bottom:20px;
+}
+
+.media-content h6 {
+	font-size:14px;
+	font-weight:700;
+}
+
+.media-content span{
+	color:#a9a9a9;
+	font-size:14px;
+	font-weight:300;
+}
+
+.comment-area .thumbnail > img {
+  display: block;
+	width:60px;
+	height:60px;
+}
+.filter-list{
+	margin-top:20px;
+}
+
+.comment-area .media a.reply {
+	font-weight: 600;
+}
+
+/* --- pagination --- */
+
+#pagination a,
+#pagination span {
+    display: block;
+    float: left;
+    margin: 0 7px 0 0;
+    padding: 7px 10px 6px 10px;
+    font-size: 12px;
+    line-height:12px;
+    color: #888;
+	font-weight:600;
+-webkit-border-radius: 2px;
+			 -moz-border-radius: 2px;
+				  border-radius:  2px;
+}
+
+#pagination a:hover {
+    color: #fff;
+	text-decoration:none;
+}
+
+#pagination span.current {
+    background: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* ===== Widgets ===== */
+
+
+/* --- Recent post widget --- */
+
+.recent-post{
+	margin:20px 0 0 0;
+	padding:0;
+	line-height:18px;
+}
+
+.recent-post h5 a:hover {
+	text-decoration:none;
+}
+
+.recent-post .text h5 a {
+	color:#353535;
+}
+
+ul.recent li h6 a:hover {
+    color: #18d26e;
+}
+    
+ul.time-post{
+	float:left;
+	width:120px;
+	padding:0;
+	list-style:none;
+	margin:0 20px 0 0;
+	text-align:center;
+	color: #0e0f0f;
+}
+
+ul.time-post li{
+	float:none;
+	background:#f8f8f8;
+	list-style:none;
+	margin:0 0 2px 0;
+	padding:0;
+}
+
+ul.time-post li a img:hover{
+	opacity: 0.8; 
+	/* For IE 5-7 */
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+	/* For IE 8 8 */
+	-MS-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";	
+}
+ 	
+ul.time-post li.time{
+	float:none;
+	padding:5px 0 5px 0;
+	text-shadow: none;	
+}
+
+.recent-post ul.time-post li.time{
+	color:#121214;
+}
+
+.post-meta{
+	margin-bottom:20px;
+}
+
+.post-meta span{
+	padding:0 10px 0 10px;
+	margin-bottom:10px;
+}
+
+.post-meta span a{
+	color:#919191;
+}
+
+.post-meta strong{
+	font-weight:200px;
+	color:#c7c7c7;
+}
+
+.item .text {
+	margin-left:140px;
+	margin-bottom:20px;
+}
+
+/* --- Image allignment style --- */
+
+img.pull-left, .align-left{
+	float:left;
+	margin:0 15px 15px 0;
+}
+
+.widget img.pull-left {
+	float:left;
+	margin:0 15px 15px 0;
+}
+
+img.pull-right, .align-right {
+	float:right;
+	margin:0 0 15px 15px;
+}
+
+article img.pull-left, article .align-left{
+	float:left;
+	margin:5px 15px 15px 0;
+}
+
+article img.pull-right, article .align-right{
+	float:right;
+	margin:5px 0 15px 15px;
+}
+
+/* règles pour le portfolio */
+#portfolio {
+	padding-bottom:0px;
+}
+
+.portfolio-solo .portfolio-item{
+	height:260px;
+}

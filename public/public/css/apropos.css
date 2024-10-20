@@ -1,0 +1,59 @@
+
+#listing-pole  {
+    
+}
+
+#listing-pole .box {
+    padding: 12px;
+    margin-bottom: 20px;
+    box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+    background: #fff;
+    transition: 0.4s;    
+}
+
+#listing-pole .box:hover {
+    box-shadow: 0px 0px 30px rgba(73, 78, 92, 0.15);
+    transform: translateY(-10px);
+    border:1px solid #a2a2a2;
+    background-color:#f2f5f8;
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+}
+
+#listing-pole .icon {
+    float: left;
+}
+
+#listing-pole  .icon img,
+#listing-pole  .icon i {
+    color: #18d26e;
+    font-size: 36px;
+    line-height: 1;
+    transition: 0.5s;
+}
+
+#listing-pole  .box:hover a:hover {
+    color:#18d26e;
+}
+
+#listing-pole  .title {
+    /* margin-left: 60px; */
+    text-align:center; /*  enlever, lorqu'il y'aura le icones */
+    font-weight: 700;
+    margin-bottom: 5px; /* augmenter de 10px lorsqu'il y'aura le icones */
+    font-size: 18px;
+}
+
+#listing-pole  .title a {
+    color: #111;
+    font-size:15px;
+}
+
+#listing-pole  {
+   margin-top: 20px;
+   margin-bottom: -5px; 
+}
+
+#listing-pole  {
+    
+}
