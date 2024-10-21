@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Societe;
 use App\Http\Requests\StoreSocieteRequest;
 use App\Http\Requests\UpdateSocieteRequest;
+use Illuminate\Http\Request;
 
 class SocieteController extends Controller
 {
@@ -15,7 +16,9 @@ class SocieteController extends Controller
      */
     public function index()
     {
-        //
+        $societes = Societe::all();
+
+        return view('societes.index_societes',['societes' => $societes]);
     }
 
     /**
@@ -25,7 +28,7 @@ class SocieteController extends Controller
      */
     public function create()
     {
-        //
+        return view('societes.create');
     }
 
     /**
@@ -36,7 +39,13 @@ class SocieteController extends Controller
      */
     public function store(StoreSocieteRequest $request)
     {
-        //
+        $input = $request->all();
+    
+        if ($structure = Societe::create($input)){
+            return redirect()->route("societes.index")->with("statut", "La société  a bien été ajoutée avec succès");
+
+        }
+        return redirect()->route("societes.index")->with("statut", "Echec de l'ajout de la société ");
     }
 
     /**
@@ -58,7 +67,7 @@ class SocieteController extends Controller
      */
     public function edit(Societe $societe)
     {
-        //
+        return view('societes.edit')->with('societe',$societe);
     }
 
     /**
@@ -70,7 +79,12 @@ class SocieteController extends Controller
      */
     public function update(UpdateSocieteRequest $request, Societe $societe)
     {
-        //
+       
+        if ($societe->update($request->all())){
+            return redirect()->route("societes.index")->with("statut", "La société a été modifiée avec succés");
+
+        }
+        return redirect()->route("societes.index")->with("statut", "Echec de modification de la société ");
     }
 
     /**
@@ -79,8 +93,18 @@ class SocieteController extends Controller
      * @param  \App\Models\Societe  $societe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Societe $societe)
+    public function destroy($id)
     {
-        //
+        $result = Societe::destroy($id);
+       
+        return redirect(route('societes.index'));
+    }
+
+    public function getListe(Request $request) 
+    {
+        $societes = Societe::all();
+
+        return view('societes.table')
+            ->with('societes', $societes);
     }
 }

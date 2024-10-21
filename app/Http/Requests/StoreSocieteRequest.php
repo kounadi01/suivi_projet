@@ -13,7 +13,7 @@ class StoreSocieteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreSocieteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'libelle' => 'required|string|max:255',
+            'siege' => 'required|string|max:255',
+            'adresse' => 'required|string|max:255',
+            'type' => 'required|string|max:100',
         ];
     }
 }

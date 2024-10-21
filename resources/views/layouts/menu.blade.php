@@ -37,6 +37,12 @@
                                 <li class="nav-item">
                                     <a href="{{ route('structures.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon fa fa-university"></i>
+                                        <p>Structure</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('societes.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon fa fa-university"></i>
                                         <p>Société</p>
                                     </a>
                                 </li>

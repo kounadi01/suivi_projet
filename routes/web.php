@@ -17,6 +17,8 @@ use App\Http\Controllers\PlanApprovisionController;
 use App\Http\Controllers\PlanRealisationController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ReponseController;
+use App\Http\Controllers\SocieteController;
+
 //use Khill\Lavacharts\Lavacharts;
 
 
@@ -136,5 +138,11 @@ Route::resource('photos', PhotoController::class);
 Route::post('/modifier-photo/{photo}', [PhotoController::class, "update"])->name('photos.update')->middleware(['auth']);
 Route::get('/supprimer-photo/{id}', [PhotoController::class, "destroy"])->name('photos.delete')->middleware(['auth']);
 Route::get('/liste-photo', [PhotoController::class, "getListe"])->name("photos.getListe")->middleware(['auth']);
+
+// Nouvelles routes
+
+Route::resource('societes', SocieteController::class)->middleware(['auth']);
+Route::get('/supprimer-societe/{id}', [SocieteController::class, "destroy"])->name('societes.delete')->middleware(['auth']);
+Route::get('/liste-societes', [SocieteController::class, "getListe"])->name("societes.getListe")->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
