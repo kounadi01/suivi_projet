@@ -21,7 +21,7 @@
                     <a href="#" data-url="{!! route('composantes.edit',$composante) !!}" id="modifierComposante" class="btn btn-info data-tooltip" data-tooltip="Modifier la composante">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="#" data-url="{!! route('composantes.delete', $composante->id) !!}" id="supprimerComposante" class="btn btn-info data-tooltip" data-tooltip="Supprimer la composante">
+                    <a href="#" data-url="{!! route('composantes.delete', $composante->id) !!}" id="supprimerComposante" class="btn btn-danger data-tooltip" data-tooltip="Supprimer la composante">
                         <i class="fas fa-trash"></i>
                     </a>
                 </div>

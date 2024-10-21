@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AnneeExerciceController;
+use App\Http\Controllers\BailleurController;
 use App\Http\Controllers\ComposanteController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
@@ -149,5 +150,9 @@ Route::get('/liste-societes', [SocieteController::class, "getListe"])->name("soc
 Route::resource('composantes', ComposanteController::class)->middleware(['auth']);
 Route::get('/supprimer-composante/{id}', [ComposanteController::class, "destroy"])->name('composantes.delete')->middleware(['auth']);
 Route::get('/liste-composante', [ComposanteController::class, "getListe"])->name("composantes.getListe")->middleware(['auth']);
+
+Route::resource('bailleurs', BailleurController::class)->middleware(['auth']);
+Route::get('/supprimer-bailleur/{id}', [BailleurController::class, "destroy"])->name('bailleurs.delete')->middleware(['auth']);
+Route::get('/liste-bailleurs', [BailleurController::class, "getListe"])->name("bailleurs.getListe")->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

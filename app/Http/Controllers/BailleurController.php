@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Bailleur;
 use App\Http\Requests\StoreBailleurRequest;
 use App\Http\Requests\UpdateBailleurRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BailleurController extends Controller
 {
@@ -15,7 +17,8 @@ class BailleurController extends Controller
      */
     public function index()
     {
-        //
+        $data = Bailleur::all();
+        return view('bailleur.index', ['data' => $data]);
     }
 
     /**
@@ -25,7 +28,7 @@ class BailleurController extends Controller
      */
     public function create()
     {
-        //
+        return view('bailleur.create');
     }
 
     /**
@@ -34,9 +37,22 @@ class BailleurController extends Controller
      * @param  \App\Http\Requests\StoreBailleurRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBailleurRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nom' => 'required|string|max:255',
+            'sigle' => 'required|string|max:50',
+            'telephone' => 'required|string|max:20',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('bailleurs.create'))
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            Bailleur::create($request->all());
+            return redirect(route('bailleurs.index'))->with('success', 'Bailleur créé avec succès');
+        }
     }
 
     /**
@@ -58,7 +74,7 @@ class BailleurController extends Controller
      */
     public function edit(Bailleur $bailleur)
     {
-        //
+        return view('bailleur.edit', ['bailleur' => $bailleur]);
     }
 
     /**
@@ -68,9 +84,22 @@ class BailleurController extends Controller
      * @param  \App\Models\Bailleur  $bailleur
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBailleurRequest $request, Bailleur $bailleur)
+    public function update(Request $request, Bailleur $bailleur)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nom' => 'required|string|max:255',
+            'sigle' => 'required|string|max:50',
+            'telephone' => 'required|string|max:20',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('bailleurs.edit', $bailleur))
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $bailleur->update($request->all());
+            return redirect(route('bailleurs.index'))->with('success', 'Bailleur modifié avec succès');
+        }
     }
 
     /**
@@ -79,8 +108,17 @@ class BailleurController extends Controller
      * @param  \App\Models\Bailleur  $bailleur
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bailleur $bailleur)
+    public function destroy($id)
     {
-        //
+        Bailleur::destroy($id);
+        return redirect(route('bailleurs.index'))->with('success', 'Bailleur supprimé avec succès');
+    }
+
+    public function getListe(Request $request)
+    {
+        $bailleurs = Bailleur::all();
+
+        return view('bailleur.table')
+            ->with('data', $bailleurs);
     }
 }

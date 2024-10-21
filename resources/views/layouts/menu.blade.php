@@ -64,6 +64,12 @@
                                         <p>Composantes</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('bailleurs.index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-calendar-alt"></i>
+                                        <p>Bailleurs</p>
+                                    </a>
+                                </li>
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{ route('produits.index') }}" class="nav-link">

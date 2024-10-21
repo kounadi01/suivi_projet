@@ -116,11 +116,9 @@ class ComposanteController extends Controller
      */
     public function destroy($id)
     {
-        
-            //
-            $result = Composante::destroy($id);
-    
-            return redirect(route('composantes.index'));
+        $result = Composante::destroy($id);
+
+        return redirect(route('composantes.index'));
     }
     
     public function getListe(Request $request)

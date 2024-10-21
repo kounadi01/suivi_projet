@@ -19,7 +19,7 @@
                     <a href="#" data-url="{!! route('phases.edit',$phase) !!}" id="modifierDep" class="btn btn-info data-tooltip" data-tooltip="Modifier la nature">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="#" data-url="{!! route('phases.delete', $phase->id) !!}" id="supprimerDep" class="btn btn-info data-tooltip" data-tooltip="Supprimer la nature">
+                    <a href="#" data-url="{!! route('phases.delete', $phase->id) !!}" id="supprimerDep" class="btn btn-danger data-tooltip" data-tooltip="Supprimer la nature">
                         <i class="fas fa-trash"></i>
                     </a>
                 </div>
