@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('titre' , "Liste des phases" )
+@section('titre' , "Nature des projets" )
 @section('breadcrumb')
 <li class="breadcrumb-item main-form">
     <a>
-        Employers
+        Nature des projets
     </a>
 </li>
 @endsection
@@ -15,7 +15,7 @@
     <div class="card card-primary">
         <div class="card-header bg-light">
             <h1 class="row float-right">
-                <a href="#" class="btn btn-primary float-right ml-4" id="createphase-btn"> <i class="fa fa-plus-circle"></i> Nouvelle phase</a>
+                <a href="#" class="btn btn-primary float-right ml-4" id="createphase-btn"> <i class="fa fa-plus-circle"></i> Nouvelle nature</a>
             </h1>
         </div>
         <div class="card-body">

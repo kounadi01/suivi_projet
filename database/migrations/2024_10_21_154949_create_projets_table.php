@@ -30,7 +30,7 @@ class CreateProjetsTable extends Migration
             $table->string('unite');
             $table->foreignId('idSoc')->constrained('societes');
             $table->foreignId('idAnn')->constrained('annee_exercices');
-            $table->foreignId('idNat')->constrained('nature_projets');
+            $table->foreignId('idNat')->constrained('phases');
             $table->foreignId('idBai')->constrained('bailleurs');
             $table->foreignId('idEntr')->constrained('entreprises');
             $table->timestamps();

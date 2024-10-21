@@ -25,9 +25,9 @@ class Projet extends Model
         return $this->belongsTo(AnneeExercice::class, 'idAnn');
     }
 
-    public function natureProjet()
+    public function phase()
     {
-        return $this->belongsTo(NatureProjet::class, 'idNat');
+        return $this->belongsTo(Phase::class, 'idNat');
     }
 
     public function realisations()

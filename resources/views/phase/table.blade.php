@@ -16,10 +16,10 @@
                     <a href="#" data-url="{!! route('phases.show',$phase->id) !!}" id="detailDep" class="btn btn-info data-tooltip" data-tooltip="Détails du département">
                         <i class="fas fa-eye"></i>
                     </a>
-                    <a href="#" data-url="{!! route('phases.edit',$phase) !!}" id="modifierDep" class="btn btn-info data-tooltip" data-tooltip="Modifier le département">
+                    <a href="#" data-url="{!! route('phases.edit',$phase) !!}" id="modifierDep" class="btn btn-info data-tooltip" data-tooltip="Modifier la nature">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="#" data-url="{!! route('phases.delete', $phase->id) !!}" id="supprimerDep" class="btn btn-info data-tooltip" data-tooltip="Supprimer le département">
+                    <a href="#" data-url="{!! route('phases.delete', $phase->id) !!}" id="supprimerDep" class="btn btn-info data-tooltip" data-tooltip="Supprimer la nature">
                         <i class="fas fa-trash"></i>
                     </a>
                 </div>
