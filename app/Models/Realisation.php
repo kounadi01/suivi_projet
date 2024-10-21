@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Realisation extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function projet()
+    {
+        return $this->belongsTo(Projet::class, 'idProj');
+    }
 }

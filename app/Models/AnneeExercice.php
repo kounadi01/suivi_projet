@@ -143,5 +143,8 @@ class AnneeExercice extends Model
         return $result;
     }
 
-    
+    public function projets()
+    {
+        return $this->hasMany(Projet::class);
+    }
 }
