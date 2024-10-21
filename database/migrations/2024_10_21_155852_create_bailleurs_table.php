@@ -19,6 +19,7 @@ class CreateBailleursTable extends Migration
             $table->string('sigle');
             $table->string('telephone');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

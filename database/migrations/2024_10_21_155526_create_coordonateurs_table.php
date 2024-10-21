@@ -20,6 +20,7 @@ class CreateCoordonateursTable extends Migration
             $table->string('telephone');
             $table->string('email');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -70,6 +70,12 @@
                                         <p>Bailleurs</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('coordonateurs.index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-calendar-alt"></i>
+                                        <p>Coordonateurs</p>
+                                    </a>
+                                </li>
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{ route('produits.index') }}" class="nav-link">

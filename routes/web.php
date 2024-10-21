@@ -4,6 +4,7 @@
 use App\Http\Controllers\AnneeExerciceController;
 use App\Http\Controllers\BailleurController;
 use App\Http\Controllers\ComposanteController;
+use App\Http\Controllers\CoordonateurController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
@@ -154,5 +155,9 @@ Route::get('/liste-composante', [ComposanteController::class, "getListe"])->name
 Route::resource('bailleurs', BailleurController::class)->middleware(['auth']);
 Route::get('/supprimer-bailleur/{id}', [BailleurController::class, "destroy"])->name('bailleurs.delete')->middleware(['auth']);
 Route::get('/liste-bailleurs', [BailleurController::class, "getListe"])->name("bailleurs.getListe")->middleware(['auth']);
+
+Route::resource('coordonateurs', CoordonateurController::class)->middleware(['auth']);
+Route::get('/supprimer-coordonateur/{id}', [CoordonateurController::class, "destroy"])->name('coordonateurs.delete')->middleware(['auth']);
+Route::get('/liste-coordonateurs', [CoordonateurController::class, "getListe"])->name("coordonateurs.getListe")->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

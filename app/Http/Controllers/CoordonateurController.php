@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Coordonateur;
 use App\Http\Requests\StoreCoordonateurRequest;
 use App\Http\Requests\UpdateCoordonateurRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CoordonateurController extends Controller
 {
@@ -15,7 +17,8 @@ class CoordonateurController extends Controller
      */
     public function index()
     {
-        //
+        $data = Coordonateur::all();
+        return view('coordonateur.index', ['data' => $data]);
     }
 
     /**
@@ -25,7 +28,7 @@ class CoordonateurController extends Controller
      */
     public function create()
     {
-        //
+        return view('coordonateur.create');
     }
 
     /**
@@ -34,9 +37,23 @@ class CoordonateurController extends Controller
      * @param  \App\Http\Requests\StoreCoordonateurRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCoordonateurRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'telephone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('coordonateurs.create'))
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            Coordonateur::create($request->all());
+            return redirect(route('coordonateurs.index'))->with('success', 'Coordonateur créé avec succès');
+        }
     }
 
     /**
@@ -58,7 +75,7 @@ class CoordonateurController extends Controller
      */
     public function edit(Coordonateur $coordonateur)
     {
-        //
+        return view('coordonateur.edit', ['coordonateur' => $coordonateur]);
     }
 
     /**
@@ -68,9 +85,23 @@ class CoordonateurController extends Controller
      * @param  \App\Models\Coordonateur  $coordonateur
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCoordonateurRequest $request, Coordonateur $coordonateur)
+    public function update(Request $request, Coordonateur $coordonateur)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'telephone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('coordonateurs.edit', $coordonateur))
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $coordonateur->update($request->all());
+            return redirect(route('coordonateurs.index'))->with('success', 'Coordonateur modifié avec succès');
+        }
     }
 
     /**
@@ -79,8 +110,15 @@ class CoordonateurController extends Controller
      * @param  \App\Models\Coordonateur  $coordonateur
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Coordonateur $coordonateur)
+    public function destroy($id)
     {
-        //
+        Coordonateur::destroy($id);
+        return redirect(route('coordonateurs.index'))->with('success', 'Coordonateur supprimé avec succès');
+    }
+
+    public function getListe(Request $request)
+    {
+        $coordonateurs = Coordonateur::all();
+        return view('coordonateur.table', ['data' => $coordonateurs]);
     }
 }

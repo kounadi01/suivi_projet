@@ -20,6 +20,7 @@ class CreateSocietesTable extends Migration
             $table->string('adresse');
             $table->string('type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

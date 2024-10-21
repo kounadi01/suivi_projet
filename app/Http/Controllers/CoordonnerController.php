@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Coordonner;
 use App\Http\Requests\StoreCoordonnerRequest;
 use App\Http\Requests\UpdateCoordonnerRequest;
+use App\Models\Coordonateur;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CoordonnerController extends Controller
 {
@@ -15,7 +18,7 @@ class CoordonnerController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -25,7 +28,7 @@ class CoordonnerController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,9 +37,9 @@ class CoordonnerController extends Controller
      * @param  \App\Http\Requests\StoreCoordonnerRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCoordonnerRequest $request)
+    public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -58,7 +61,7 @@ class CoordonnerController extends Controller
      */
     public function edit(Coordonner $coordonner)
     {
-        //
+       
     }
 
     /**

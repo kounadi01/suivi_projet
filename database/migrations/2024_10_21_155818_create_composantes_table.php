@@ -18,6 +18,7 @@ class CreateComposantesTable extends Migration
             $table->string('libelle');
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

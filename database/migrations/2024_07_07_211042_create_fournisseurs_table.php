@@ -24,6 +24,7 @@ class CreateFournisseursTable extends Migration
             $table->string('ifu')->nullable()->unique();
             $table->string('responsable')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
