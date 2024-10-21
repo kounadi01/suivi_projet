@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h5 class="modal-title">
-        Modifier le fournisseur
+        Modifier l'entreprise
     </h5>
     <button type="button" aria-label="Close" class="close" data-dismiss="modal">×</button>
 </div>

@@ -7,7 +7,7 @@
             <th>Adresse</th>
             <th>Email</th>
             <th>Responsable</th>
-            <th>Inscrit le</th>
+            <th>Inscrite le</th>
             <th>Action</th>
         </tr>
     </thead>

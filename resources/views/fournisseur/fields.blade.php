@@ -13,7 +13,7 @@
 </div>
 <div class="row">
   <div class="form-group required col-md-12">
-    <label class="control-label" for="nom">Dénomination du fournisseur</label>
+    <label class="control-label" for="nom">Dénomination de l'entreprise</label>
     {!! Form::text('nom',null,['required','class'=>'form-control','id'=>'nom']) !!}
     <small class="text-danger" id="nomSpan"> </small>
   </div>
