@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('titre' , 'Liste des structures' )
+@section('titre' , 'Liste des sociétés' )
 @section('breadcrumb')
 <li class="breadcrumb-item main-form">
     <a>
-        Structures
+        Sociétés
     </a>
 </li>
 @endsection
@@ -24,7 +24,7 @@
         @endif
         <div class="card-header bg-light">
             <h1 class="row float-right">
-                <a href="{{route('structures.create')}}" class="btn btn-primary float-right ml-4"> <i class="fa fa-plus-circle"></i> Nouvelle structure</a>
+                <a href="{{route('structures.create')}}" class="btn btn-primary float-right ml-4"> <i class="fa fa-plus-circle"></i> Nouvelle société</a>
 
             </h1>
         </div>

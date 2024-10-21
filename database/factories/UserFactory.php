@@ -36,7 +36,7 @@ class UserFactory extends Factory
             'isenable' => 1,
             'profil_id' => 1,
             'structure_id' => 1,
-            'province_id' => 9,
+            //'province_id' => 9,
         ];
     }
 

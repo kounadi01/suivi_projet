@@ -78,10 +78,8 @@
                     email_struct : {
                         required: true,
                         email: true
-                    },
-                    responsable_struct : {
-                        required : true
                     }
+                    
                 },
                 messages: {
                     nom_struct: {
@@ -97,11 +95,6 @@
                     tel_struct: {
                         required: "Veuillez fournir un numéro de téléphone ",
                         minlength : "Le numéro doit comporter 08 chiffres"
-
-                    },
-                    responsable_struct: {
-                        required: "Veuillez fournir le nom & le prenom du responsable "
-
 
                     }
                 }

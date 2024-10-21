@@ -22,9 +22,9 @@ class CreateStructuresTable extends Migration
             $table->string('tel_struct')->nullable();
             $table->string('siege')->nullable();
             $table->string('categorie')->nullable();
-            $table->string('ifu')->nullable()->unique();
+            // $table->string('ifu')->nullable()->unique();
             $table->string('email_struct');
-            $table->string('responsable_struct');
+            // $table->string('responsable_struct');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

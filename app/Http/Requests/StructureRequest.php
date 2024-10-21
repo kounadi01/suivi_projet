@@ -25,12 +25,12 @@ class StructureRequest extends FormRequest
     {
         return [
             'nom_struct' => 'required|unique:structures,nom_struct',
-            'ifu_struct' => 'required|unique:structures,ifu_struct',
+            // 'ifu_struct' => 'required|unique:structures,ifu_struct',
             'sigle_struct' => 'nullable',
             'type_struct' => 'required',
             'tel_struct' => 'required',
-            'email_struct' => 'required',
-            'responsable_struct' => 'required'
+            'email_struct' => 'required'
+            // 'responsable_struct' => 'required'
         ];
     }
 }

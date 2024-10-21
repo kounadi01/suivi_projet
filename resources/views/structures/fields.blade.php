@@ -7,11 +7,11 @@
       {!! $errors->first('categorie_struct', '<small class="help-block">:message</small>') !!}
     </div>
 
-    <div class="required form-group {!! $errors->has('ifu_struct') ? 'has-error' : '' !!} col-md-6">
+    {{-- <div class="required form-group {!! $errors->has('ifu_struct') ? 'has-error' : '' !!} col-md-6">
       <label class="control-label" for="ifu_struct">IFU</label>
       {!! Form::text('ifu_struct', null, ['class' => 'form-control', 'placeholder' => 'IFU de la structure','id'=>'ifu_struct']) !!}
       {!! $errors->first('ifu_struct', '<small class="help-block">:message</small>') !!}
-    </div>
+    </div> --}}
   </div>
 
   <div class="required form-group{!! $errors->has('nom_struct') ? 'has-error' : '' !!}">
@@ -38,11 +38,11 @@
       {!! $errors->first('type_struct', '<small class="help-block">:message</small>') !!}
     </div>
 
-    <div class="required form-group {!! $errors->has('phase_struct') ? 'has-error' : '' !!} col-md-6">
+    {{-- <div class="required form-group {!! $errors->has('phase_struct') ? 'has-error' : '' !!} col-md-6">
       <label class="control-label" for="phase_struct">Phase</label>
       {!! Form::select('phase_struct',['exploration'=>'Exploration','developpement'=>'Développement/Construction','exploitation'=>'Exploitation/Production','rehabilitation'=>'Réhabilitation/Fermeture'], null, ['class' => 'form-control', 'placeholder' => 'Selectionner','id'=>'phase_struct']) !!}
       {!! $errors->first('phase_struct', '<small class="help-block">:message</small>') !!}
-    </div>
+    </div> --}}
   </div>
 
   <div class="row">
@@ -58,9 +58,9 @@
       {!! $errors->first('email_struct', '<small class="help-block">:message</small>') !!}
     </div>
   </div>
-  <div class="required form-group {!! $errors->has('responsable_struct') ? 'has-error' : '' !!}">
+  {{-- <div class="required form-group {!! $errors->has('responsable_struct') ? 'has-error' : '' !!}">
     <label class="control-label" for="responsable_struct">Nom & prenom du responsable</label>
     {!! Form::text('responsable_struct', null, ['class' => 'form-control', 'placeholder' => 'Nom & prenom du rsponsable de la structure','id'=>'responsable_struct']) !!}
     {!! $errors->first('responsable_struct', '<small class="help-block">:message</small>') !!}
-  </div>
+  </div> --}}
 </div>
