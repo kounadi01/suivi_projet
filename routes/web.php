@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AnneeExerciceController;
+use App\Http\Controllers\ComposanteController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
@@ -144,5 +145,9 @@ Route::get('/liste-photo', [PhotoController::class, "getListe"])->name("photos.g
 Route::resource('societes', SocieteController::class)->middleware(['auth']);
 Route::get('/supprimer-societe/{id}', [SocieteController::class, "destroy"])->name('societes.delete')->middleware(['auth']);
 Route::get('/liste-societes', [SocieteController::class, "getListe"])->name("societes.getListe")->middleware(['auth']);
+
+Route::resource('composantes', ComposanteController::class)->middleware(['auth']);
+Route::get('/supprimer-composante/{id}', [ComposanteController::class, "destroy"])->name('composantes.delete')->middleware(['auth']);
+Route::get('/liste-composante', [ComposanteController::class, "getListe"])->name("composantes.getListe")->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

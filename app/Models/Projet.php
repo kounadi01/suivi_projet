@@ -17,7 +17,7 @@ class Projet extends Model
 
     public function entreprise()
     {
-        return $this->belongsTo(Entreprise::class, 'idEntr');
+        return $this->belongsTo(Fournisseur::class, 'idEntr');
     }
 
     public function anneeExercice()

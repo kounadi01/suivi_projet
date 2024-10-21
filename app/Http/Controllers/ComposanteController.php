@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Composante;
 use App\Http\Requests\StoreComposanteRequest;
 use App\Http\Requests\UpdateComposanteRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ComposanteController extends Controller
 {
@@ -15,7 +17,9 @@ class ComposanteController extends Controller
      */
     public function index()
     {
-        //
+        $data = Composante::all();
+
+        return view('composante.index', ['data' => $data]);
     }
 
     /**
@@ -34,9 +38,25 @@ class ComposanteController extends Controller
      * @param  \App\Http\Requests\StoreComposanteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreComposanteRequest $request)
+    public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'libelle' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('composantes.create'))
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $input = $request->all();
+            //var_dump($input);
+            Composante::create($input);
+
+            return redirect(route('composantes.index'));
+        }
     }
 
     /**
@@ -58,7 +78,7 @@ class ComposanteController extends Controller
      */
     public function edit(Composante $composante)
     {
-        //
+        return view('composante.edit', ['composante' => $composante]);
     }
 
     /**
@@ -68,9 +88,24 @@ class ComposanteController extends Controller
      * @param  \App\Models\Composante  $composante
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateComposanteRequest $request, Composante $composante)
+    public function update(Request $request, Composante $composante)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'libelle' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('composantes.edit', $composante))
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $input = $request->all();
+            //var_dump($input);
+            $composante->update($input);
+
+            return redirect(route('composantes.index'));
+        }
     }
 
     /**
@@ -79,8 +114,21 @@ class ComposanteController extends Controller
      * @param  \App\Models\Composante  $composante
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Composante $composante)
+    public function destroy($id)
     {
-        //
+        
+            //
+            $result = Composante::destroy($id);
+    
+            return redirect(route('composantes.index'));
     }
+    
+    public function getListe(Request $request)
+    {
+        $composantes = Composante::all();
+
+        return view('composante.table')
+            ->with('data', $composantes);
+    }
+    
 }

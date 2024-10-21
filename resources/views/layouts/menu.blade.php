@@ -58,6 +58,12 @@
                                         <p>Nature du projet</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('composantes.index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-calendar-alt"></i>
+                                        <p>Composantes</p>
+                                    </a>
+                                </li>
                                 @endif
                                 <li class="nav-item">
                                     <a href="{{ route('produits.index') }}" class="nav-link">
