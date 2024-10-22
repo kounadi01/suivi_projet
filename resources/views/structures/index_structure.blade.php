@@ -3,7 +3,7 @@
 @section('breadcrumb')
 <li class="breadcrumb-item main-form">
     <a>
-        Sociétés
+        Structures
     </a>
 </li>
 @endsection

@@ -47,9 +47,11 @@ class PhaseController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('phases.create'))
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422); // 422 Unprocessable Entity
+        
         } else {
             $input = $request->all();
             //var_dump($input);
@@ -97,9 +99,11 @@ class PhaseController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('phases.edit', $phase))
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422); // 422 Unprocessable Entity
+        
         } else {
             $input = $request->all();
             //var_dump($input);

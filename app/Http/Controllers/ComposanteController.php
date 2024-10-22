@@ -47,9 +47,11 @@ class ComposanteController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('composantes.create'))
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422); // 422 Unprocessable Entity
+        
         } else {
             $input = $request->all();
             //var_dump($input);
@@ -96,9 +98,11 @@ class ComposanteController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('composantes.edit', $composante))
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422); // 422 Unprocessable Entity
+        
         } else {
             $input = $request->all();
             //var_dump($input);

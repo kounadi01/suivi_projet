@@ -42,14 +42,16 @@ class CoordonateurController extends Controller
         $validator = Validator::make($request->all(), [
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'telephone' => 'required|string|max:20',
+            'telephone' => 'required|string|min:8',
             'email' => 'required|email|max:255',
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('coordonateurs.create'))
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422); // 422 Unprocessable Entity
+        
         } else {
             Coordonateur::create($request->all());
             return redirect(route('coordonateurs.index'))->with('success', 'Coordonateur créé avec succès');
@@ -90,14 +92,16 @@ class CoordonateurController extends Controller
         $validator = Validator::make($request->all(), [
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'telephone' => 'required|string|max:20',
+            'telephone' => 'required|string|min:8',
             'email' => 'required|email|max:255',
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('coordonateurs.edit', $coordonateur))
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422); // 422 Unprocessable Entity
+        
         } else {
             $coordonateur->update($request->all());
             return redirect(route('coordonateurs.index'))->with('success', 'Coordonateur modifié avec succès');

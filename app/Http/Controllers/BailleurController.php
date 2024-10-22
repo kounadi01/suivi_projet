@@ -42,14 +42,17 @@ class BailleurController extends Controller
         $validator = Validator::make($request->all(), [
             'nom' => 'required|string|max:255',
             'sigle' => 'required|string|max:50',
-            'telephone' => 'required|string|max:20',
+            'telephone' => 'required|string|min:8',
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('bailleurs.create'))
-                ->withErrors($validator)
-                ->withInput();
-        } else {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422); // 422 Unprocessable Entity
+        }
+        else {
+            
             Bailleur::create($request->all());
             return redirect(route('bailleurs.index'))->with('success', 'Bailleur créé avec succès');
         }
@@ -89,13 +92,15 @@ class BailleurController extends Controller
         $validator = Validator::make($request->all(), [
             'nom' => 'required|string|max:255',
             'sigle' => 'required|string|max:50',
-            'telephone' => 'required|string|max:20',
+            'telephone' => 'required|string|min:8',
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('bailleurs.edit', $bailleur))
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422); // 422 Unprocessable Entity
+        
         } else {
             $bailleur->update($request->all());
             return redirect(route('bailleurs.index'))->with('success', 'Bailleur modifié avec succès');

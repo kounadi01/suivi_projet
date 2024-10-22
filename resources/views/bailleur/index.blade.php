@@ -162,5 +162,7 @@
                 makeClientSideDataTable();
             })
     }
+
+
 </script>
 @endsection
