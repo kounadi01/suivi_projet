@@ -35,12 +35,16 @@ class ProjetController extends Controller
      */
     public function create()
     {
-        $societes = Societe::pluck('libelle', 'id');
-        $natures = Phase::pluck('libelle', 'id');
-        $bailleurs = Bailleur::pluck('nom', 'id');
-        $entreprises = Fournisseur::pluck('nom', 'id');
-        $composantes = Composante::pluck('libelle', 'id');
-        $coordonnateurs = Coordonateur::pluck('nom', 'id');
+        try {
+            $societes = Societe::pluck('libelle', 'id');
+            $natures = Phase::pluck('libelle', 'id');
+            $bailleurs = Bailleur::selectRaw("CONCAT(nom, ' (', sigle, ')') as nom_complet, id")->pluck('nom_complet', 'id');
+            $entreprises = Fournisseur::pluck('nom', 'id');
+            $composantes = Composante::pluck('libelle', 'id');
+            $coordonnateurs = Coordonateur::pluck('nom', 'id');
+        } catch (\Exception $e) {
+            return redirect()->back();
+        }
 
 
         return view('projets.create', compact('societes', 'natures', 'bailleurs', 'entreprises', 'composantes', 'coordonnateurs'));
