@@ -110,15 +110,20 @@ class ProjetController extends Controller
      */
     public function edit(Projet $projet)
     {
-        $societes = Societe::pluck('libelle', 'id');
-        $annees = AnneeExercice::pluck('libelle', 'id');
-        $phases = Phase::pluck('libelle', 'id');
-        $bailleurs = Bailleur::pluck('nom', 'id');
-        $fournisseurs = Fournisseur::pluck('nom', 'id');
-        $composantes = Composante::pluck('libelle', 'id');
-        $coordonnateurs = Coordonateur::pluck('nom', 'id');
+         try {
+            $societes = Societe::pluck('libelle', 'id');
+            $natures = Phase::pluck('libelle', 'id');
+            $bailleurs = Bailleur::selectRaw("CONCAT(nom, ' (', sigle, ')') as nom_complet, id")->pluck('nom_complet', 'id');
+            $entreprises = Fournisseur::pluck('nom', 'id');
+            $composantes = Composante::pluck('libelle', 'id');
+            $coordonnateurs = Coordonateur::pluck('nom', 'id');
+        } catch (\Exception $e) {
+            return redirect()->back();
+        }
 
-        return view('projets.edit', compact('projet', 'societes', 'annees', 'phases', 'bailleurs', 'fournisseurs', 'composantes', 'coordonnateurs'));
+
+        return view('projets.edit', compact('projet', 'societes', 'natures', 'bailleurs', 'entreprises', 'composantes', 'coordonnateurs'));
+
     
     }
 
@@ -129,42 +134,22 @@ class ProjetController extends Controller
      * @param  \App\Models\Projet  $projet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Projet $projet)
+    public function update(UpdateProjetRequest $request, Projet $projet)
     {
-         // Validation des données
-         $request->validate([
-            'libelle' => 'required|string',
-            'description' => 'required|string',
-            'quantite_total' => 'required|string',
-            'montant_total' => 'required|string',
-            'etat_execution' => 'required|string',
-            'localisation' => 'required|string',
-            'date_demarrage' => 'required|date',
-            'date_fin_probable' => 'required|date',
-            'categorie' => 'required|string',
-            'taux_phyque' => 'required|string',
-            'taux_financier' => 'required|string',
-            'statut' => 'required|string',
-            'unite' => 'required|string',
-            'idSoc' => 'required|integer',
-            'idAnn' => 'required|integer',
-            'idNat' => 'required|integer',
-            'idBai' => 'required|integer',
-            'idEntr' => 'required|integer',
-            'composantes' => 'required|array',
-            'coordonnateur' => 'required|integer',
-        ]);
-
+        
         // Mettre à jour le projet
-        $projet->update($request->except(['composantes', 'coordonnateur']));
+        if($projet->update($request->except(['composantes', 'coordonnateur']))){
 
         // Mettre à jour les composantes (many-to-many)
-        $projet->composantes()->sync($request->composantes);
+            $projet->composantes()->sync($request->composantes);
 
-        // Mettre à jour le coordonnateur via la table pivot (many-to-many)
-        $projet->coordonnateurs()->sync([$request->coordonnateur]);
+            // Mettre à jour le coordonnateur via la table pivot (many-to-many)
+            $projet->coordonnateurs()->sync([$request->coordonnateur]);
 
-        return redirect()->route('projets.index')->with("statut", "Le projet a été modifié avec succès");
+            return redirect()->route('projets.index')->with("statut", "Le projet a été modifié avec succès");
+        }
+
+        return redirect()->route('projets.index')->with("statut", "Echec de la modification du projet");
    
     }
 

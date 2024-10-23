@@ -31,7 +31,7 @@ class StoreProjetRequest extends FormRequest
             'etat_execution' => 'required|string',
             'localisation' => 'required|string',
             'date_demarrage' => 'required|date',
-            'date_fin_probable' => 'required|date',
+            'date_fin_probable' => 'required|date|after_or_equal:date_demarrage',
             'categorie' => 'required|string',
             'taux_physique' => 'required|numeric',
             'taux_financier' => 'required|numeric',

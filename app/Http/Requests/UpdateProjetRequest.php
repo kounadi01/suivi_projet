@@ -13,7 +13,7 @@ class UpdateProjetRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,25 @@ class UpdateProjetRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'libelle' => 'required|string',
+            'description' => 'required|string',
+            'quantite_total' => 'required|numeric',
+            'montant_total' => 'required|integer',
+            'etat_execution' => 'required|string',
+            'localisation' => 'required|string',
+            'date_demarrage' => 'required|date',
+            'date_fin_probable' => 'required|date|after_or_equal:date_demarrage',
+            'categorie' => 'required|string',
+            'taux_physique' => 'required|numeric',
+            'taux_financier' => 'required|numeric',
+            'statut' => 'required|string',
+            'unite' => 'required|string',
+            'idSoc' => 'required|integer',
+            'idNat' => 'required|integer',
+            'idBai' => 'required|integer',
+            'idEntr' => 'required|integer',
+            'composantes' => 'required|array',
+            'coordonnateur' => 'required|integer',
         ];
     }
 }
