@@ -118,7 +118,7 @@
 
         <div class="form-group col-md-6">
             <label class="control-label" for="coordonnateur">Coordonnateur</label>
-            {!! Form::select('coordonnateur', $coordonnateurs, $projet->coordonnateurs->first()->id ?? null, ['class' => 'form-control', 'id' => 'coordonnateur']) !!}
+            {!! Form::select('coordonnateur', $coordonnateurs, $projet->coordonnateurs->last()->id ?? null, ['class' => 'form-control', 'id' => 'coordonnateur']) !!}
         </div>
     </div>
 

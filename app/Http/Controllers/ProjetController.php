@@ -41,15 +41,13 @@ class ProjetController extends Controller
             $bailleurs = Bailleur::selectRaw("CONCAT(nom, ' (', sigle, ')') as nom_complet, id")->pluck('nom_complet', 'id');
             $entreprises = Fournisseur::pluck('nom', 'id');
             $composantes = Composante::pluck('libelle', 'id');
-            $coordonnateurs = Coordonateur::pluck('nom', 'id');
+            $coordonnateurs = Coordonateur::selectRaw("CONCAT(nom, ' ', prenom) as nom_complet, id")->pluck('nom_complet', 'id');
         } catch (\Exception $e) {
             return redirect()->back();
         }
 
 
         return view('projets.create', compact('societes', 'natures', 'bailleurs', 'entreprises', 'composantes', 'coordonnateurs'));
-    
-   
     }
 
     /**
@@ -61,21 +59,21 @@ class ProjetController extends Controller
     public function store(StoreProjetRequest $request)
     {
 
-         $annee = AnneeExercice::where('statut', '=', 'active')->first();
+        $annee = AnneeExercice::where('statut', '=', 'active')->first();
 
-         if($annee == NULL){
+        if ($annee == NULL) {
             return redirect()->route('projets.index')->with("statut", "Echec! Créer une année active d'abord");
-         }
-         
-         // Ajouter l'année active à la requête avant la création du projet
-         $data = $request->except(['composantes', 'coordonnateur']);
-         $data['idAnn'] = $annee->id; // Ajouter l'ID de l'année d'exercice active
-         
-         // Créer le projet avec les données, y compris l'année d'exercice
-         if ($projet = Projet::create($data)){
+        }
+
+        // Ajouter l'année active à la requête avant la création du projet
+        $data = $request->except(['composantes', 'coordonnateur']);
+        $data['idAnn'] = $annee->id; // Ajouter l'ID de l'année d'exercice active
+
+        // Créer le projet avec les données, y compris l'année d'exercice
+        if ($projet = Projet::create($data)) {
             // Attacher les composantes (many-to-many)
             $projet->composantes()->sync($request->composantes);
-            
+
             $projet->coordonnateurs()->sync([
                 $request->coordonnateur => [
                     'date_debut' => $request->date_demarrage,
@@ -84,11 +82,9 @@ class ProjetController extends Controller
             ]);
 
             return redirect()->route('projets.index')->with("statut", "Le projet a été ajouté avec succès");
-         }
+        }
 
-         return redirect()->route('projets.index')->with("statut", "Echec de la création du projet");
-         
-
+        return redirect()->route('projets.index')->with("statut", "Echec de la création du projet");
     }
 
     /**
@@ -110,21 +106,19 @@ class ProjetController extends Controller
      */
     public function edit(Projet $projet)
     {
-         try {
+        try {
             $societes = Societe::pluck('libelle', 'id');
             $natures = Phase::pluck('libelle', 'id');
             $bailleurs = Bailleur::selectRaw("CONCAT(nom, ' (', sigle, ')') as nom_complet, id")->pluck('nom_complet', 'id');
             $entreprises = Fournisseur::pluck('nom', 'id');
             $composantes = Composante::pluck('libelle', 'id');
-            $coordonnateurs = Coordonateur::pluck('nom', 'id');
+            $coordonnateurs = Coordonateur::selectRaw("CONCAT(nom, ' ', prenom) as nom_complet, id")->pluck('nom_complet', 'id');
         } catch (\Exception $e) {
             return redirect()->back();
         }
 
 
         return view('projets.edit', compact('projet', 'societes', 'natures', 'bailleurs', 'entreprises', 'composantes', 'coordonnateurs'));
-
-    
     }
 
     /**
@@ -136,21 +130,33 @@ class ProjetController extends Controller
      */
     public function update(UpdateProjetRequest $request, Projet $projet)
     {
-        
-        // Mettre à jour le projet
-        if($projet->update($request->except(['composantes', 'coordonnateur']))){
 
-        // Mettre à jour les composantes (many-to-many)
+        // Mettre à jour le projet
+        if ($projet->update($request->except(['composantes', 'coordonnateur']))) {
+
+            // Mettre à jour les composantes (many-to-many)
             $projet->composantes()->sync($request->composantes);
 
-            // Mettre à jour le coordonnateur via la table pivot (many-to-many)
-            $projet->coordonnateurs()->sync([$request->coordonnateur]);
+            // Récupérer le coordonnateur actuel
+            $ancienCoordonnateur = $projet->coordonnateurs()->first();
+
+            if ($ancienCoordonnateur) {
+                // Mettre à jour la date de fin de l'ancien coordonnateur dans la table pivot
+                $projet->coordonnateurs()->updateExistingPivot($ancienCoordonnateur->id, [
+                    'date_fin' => now()
+                ]);
+            }
+
+            // Ajouter le nouveau coordonnateur avec la date_debut et la date_fin
+            $projet->coordonnateurs()->attach($request->coordonnateur, [
+                'date_debut' => now(),
+                'date_fin' => $request->date_fin_probable
+            ]);
 
             return redirect()->route('projets.index')->with("statut", "Le projet a été modifié avec succès");
         }
 
         return redirect()->route('projets.index')->with("statut", "Echec de la modification du projet");
-   
     }
 
     /**
@@ -164,7 +170,6 @@ class ProjetController extends Controller
         // Supprimer le projet
         Projet::destroy($id);
         return redirect()->route('projets.index')->with("statut", "Le projet a été supprimé avec succès");
-    
     }
 
     public function getListe(Request $request)
@@ -172,5 +177,4 @@ class ProjetController extends Controller
         $projets = Projet::all();
         return view('projets.table')->with('projets', $projets);
     }
-
 }

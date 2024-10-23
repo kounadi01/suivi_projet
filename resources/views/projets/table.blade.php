@@ -17,14 +17,14 @@
         @foreach($projets as $index => $projet)
         <tr>
             <td>{{ $index + 1 }}</td>
-            <td>{{ $projet->libelle }}</td>
-            <td>{{ $projet->description }}</td>
-            <td>{{ $projet->quantite_total }}</td>
-            <td>{{ $projet->montant_total }}</td>
-            <td>{{ $projet->etat_execution }}</td>
-            <td>{{ $projet->localisation }}</td>
+            <td>{{ $projet->libelle ?? '' }}</td>
+            <td>{{ $projet->description ?? ''}}</td>
+            <td>{{ $projet->quantite_total ?? ''}}</td>
+            <td>{{ $projet->montant_total ?? '' }}</td>
+            <td>{{ $projet->etat_execution ?? '' }}</td>
+            <td>{{ $projet->localisation  ?? '' }}</td>
             <td>{{ implode(', ', $projet->composantes->pluck('libelle')->toArray()) }}</td>
-            <td>{{ $projet->coordonnateurs->first()->nom ?? '' }}</td> {{-- Affichage du coordonnateur unique --}}
+            <td>{{ $projet->coordonnateurs->last()->nom ?? '' }} {{ $projet->coordonnateurs->last()->prenom ?? '' }}</td> 
             <td>
                 <div class='btn-group'>
                     <a href="{{ route('projets.edit', $projet->id) }}" class="btn btn-info data-tooltip" data-tooltip="Modifier le projet">
