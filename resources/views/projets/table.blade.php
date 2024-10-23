@@ -30,7 +30,7 @@
                     <a href="{{ route('projets.edit', $projet->id) }}" class="btn btn-info data-tooltip" data-tooltip="Modifier le projet">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="#" data-url="{!! route('projets.delete', $projet->id) !!}" id="supprimerProjet" class="btn btn-danger data-tooltip" data-tooltip="Supprimer le projet">
+                    <a href="#" data-url="{!! route('projets.delete', $projet->id) !!}" id="supprimerProj" class="btn btn-danger data-tooltip" data-tooltip="Supprimer le projet">
                         <i class="fas fa-trash"></i>
                     </a>
                 </div>
