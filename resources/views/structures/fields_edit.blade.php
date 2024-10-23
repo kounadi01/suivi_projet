@@ -28,7 +28,7 @@
   <div class="row">
     <div class="required form-group {!! $errors->has('type_struct') ? 'has-error' : '' !!} col-md-6">
       <label class="control-label" for="type_struct">Type</label>
-      {!! Form::select('type_struct',['Etat'=>'Etat','Societé minière'=>'Societé minière','Sous-traitant'=>'Sous-traitant'], null, ['class' => 'form-control', 'placeholder' => 'Selectionner','id'=>'type_struct']) !!}
+      {!! Form::select('type_struct',['Societé énergétique'=>'Societé énergétique'], null, ['class' => 'form-control', 'placeholder' => 'Selectionner','id'=>'type_struct']) !!}
       {!! $errors->first('type_struct', '<small class="help-block">:message</small>') !!}
     </div>
 

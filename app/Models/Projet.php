@@ -37,8 +37,8 @@ class Projet extends Model
 
     public function coordonnateurs()
     {
-        return $this->belongsToMany(Coordonateur::class, 'coordonners', 'idProj', 'idCoord')
-                    ->withPivot('date_debut', 'date_fin')
+        return $this->belongsToMany(Coordonateur::class, 'coordonnateur_projets', 'idProj', 'idCoord')
+                    ->withPivot('idCoord', 'idProj', 'date_debut', 'date_fin')
                     ->withTimestamps();
     }
 

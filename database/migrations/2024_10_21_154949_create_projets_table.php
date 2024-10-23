@@ -24,7 +24,7 @@ class CreateProjetsTable extends Migration
             $table->date('date_demarrage');
             $table->date('date_fin_probable');
             $table->string('categorie');
-            $table->string('taux_phyque');
+            $table->string('taux_physique');
             $table->string('taux_financier');
             $table->string('statut');
             $table->string('unite');

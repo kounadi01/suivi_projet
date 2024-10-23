@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCoordonnersTable extends Migration
+class CoordonnateurProjet extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCoordonnersTable extends Migration
      */
     public function up()
     {
-        Schema::create('coordonners', function (Blueprint $table) {
+        Schema::create('coordonnateur_projets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('idCoord')->constrained('coordonnateurs');
             $table->foreignId('idProj')->constrained('projets');

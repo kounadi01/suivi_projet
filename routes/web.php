@@ -19,6 +19,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PlanApprovisionController;
 use App\Http\Controllers\PlanRealisationController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\ReponseController;
 use App\Http\Controllers\SocieteController;
 
@@ -159,5 +160,9 @@ Route::get('/liste-bailleurs', [BailleurController::class, "getListe"])->name("b
 Route::resource('coordonateurs', CoordonateurController::class)->middleware(['auth']);
 Route::get('/supprimer-coordonateur/{id}', [CoordonateurController::class, "destroy"])->name('coordonateurs.delete')->middleware(['auth']);
 Route::get('/liste-coordonateurs', [CoordonateurController::class, "getListe"])->name("coordonateurs.getListe")->middleware(['auth']);
+
+Route::resource('projets', ProjetController::class)->middleware(['auth']);
+Route::get('/supprimer-projet/{id}', [ProjetController::class, "destroy"])->name('projets.delete')->middleware(['auth']);
+Route::get('/liste-projets', [ProjetController::class, "getListe"])->name("projets.getListe")->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

@@ -34,12 +34,12 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 @if(\App\Models\User::authUserProfil()->nom=='Administrateur' )
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('structures.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon fa fa-university"></i>
                                         <p>Structure</p>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('societes.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon fa fa-university"></i>
@@ -77,16 +77,22 @@
                                     </a>
                                 </li>
                                 @endif
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('produits.index') }}" class="nav-link">
                                         <i class="nav-icon far fa-calendar-alt"></i>
                                         <p>Biens/services</p>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('fournisseurs.index') }}" class="nav-link">
                                         <i class="nav-icon far fa-calendar-alt"></i>
                                         <p>Entreprises</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('projets.index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-calendar-alt"></i>
+                                        <p>Projets</p>
                                     </a>
                                 </li>
                             </ul>

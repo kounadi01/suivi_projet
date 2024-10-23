@@ -9,7 +9,7 @@
 
       <div class="required form-group col-md-6 {!! $errors->has('type') ? 'has-error' : '' !!}">
           <label class="control-label" for="type">Type</label>
-          {!! Form::select('type', ['Etat' => 'Etat', 'Société minière' => 'Société minière', 'Sous-traitant' => 'Sous-traitant'], null, ['class' => 'form-control', 'placeholder' => 'Sélectionner', 'id' => 'type']) !!}
+          {!! Form::select('type', ['Societé énergétique' => 'Societé énergétique'], 'Societé énergétique', ['class' => 'form-control', 'placeholder' => 'Sélectionner', 'id' => 'type']) !!}
           {!! $errors->first('type', '<small class="help-block">:message</small>') !!}
       </div>
   </div>

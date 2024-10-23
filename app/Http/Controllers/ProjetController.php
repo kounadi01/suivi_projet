@@ -5,6 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Projet;
 use App\Http\Requests\StoreProjetRequest;
 use App\Http\Requests\UpdateProjetRequest;
+use App\Models\AnneeExercice;
+use App\Models\Bailleur;
+use App\Models\Composante;
+use App\Models\Coordonateur;
+use App\Models\Fournisseur;
+use App\Models\Phase;
+use App\Models\Societe;
+use Illuminate\Http\Request;
 
 class ProjetController extends Controller
 {
@@ -15,7 +23,9 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        //
+        $projets = Projet::all();
+        //dd($projets);
+        return view('projets.index', ['projets' => $projets]);
     }
 
     /**
@@ -25,7 +35,17 @@ class ProjetController extends Controller
      */
     public function create()
     {
-        //
+        $societes = Societe::pluck('libelle', 'id');
+        $natures = Phase::pluck('libelle', 'id');
+        $bailleurs = Bailleur::pluck('nom', 'id');
+        $entreprises = Fournisseur::pluck('nom', 'id');
+        $composantes = Composante::pluck('libelle', 'id');
+        $coordonnateurs = Coordonateur::pluck('nom', 'id');
+
+
+        return view('projets.create', compact('societes', 'natures', 'bailleurs', 'entreprises', 'composantes', 'coordonnateurs'));
+    
+   
     }
 
     /**
@@ -36,7 +56,35 @@ class ProjetController extends Controller
      */
     public function store(StoreProjetRequest $request)
     {
-        //
+
+         $annee = AnneeExercice::where('statut', '=', 'active')->first();
+
+         if($annee == NULL){
+            return redirect()->route('projets.index')->with("statut", "Echec! Créer une année active d'abord");
+         }
+         
+         // Ajouter l'année active à la requête avant la création du projet
+         $data = $request->except(['composantes', 'coordonnateur']);
+         $data['idAnn'] = $annee->id; // Ajouter l'ID de l'année d'exercice active
+         
+         // Créer le projet avec les données, y compris l'année d'exercice
+         if ($projet = Projet::create($data)){
+            // Attacher les composantes (many-to-many)
+            $projet->composantes()->sync($request->composantes);
+            
+            $projet->coordonnateurs()->sync([
+                $request->coordonnateur => [
+                    'date_debut' => $request->date_demarrage,
+                    'date_fin' => $request->date_fin_probable
+                ]
+            ]);
+
+            return redirect()->route('projets.index')->with("statut", "Le projet a été ajouté avec succès");
+         }
+
+         return redirect()->route('projets.index')->with("statut", "Echec de la création du projet");
+         
+
     }
 
     /**
@@ -58,7 +106,16 @@ class ProjetController extends Controller
      */
     public function edit(Projet $projet)
     {
-        //
+        $societes = Societe::pluck('libelle', 'id');
+        $annees = AnneeExercice::pluck('libelle', 'id');
+        $phases = Phase::pluck('libelle', 'id');
+        $bailleurs = Bailleur::pluck('nom', 'id');
+        $fournisseurs = Fournisseur::pluck('nom', 'id');
+        $composantes = Composante::pluck('libelle', 'id');
+        $coordonnateurs = Coordonateur::pluck('nom', 'id');
+
+        return view('projets.edit', compact('projet', 'societes', 'annees', 'phases', 'bailleurs', 'fournisseurs', 'composantes', 'coordonnateurs'));
+    
     }
 
     /**
@@ -68,9 +125,43 @@ class ProjetController extends Controller
      * @param  \App\Models\Projet  $projet
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProjetRequest $request, Projet $projet)
+    public function update(Request $request, Projet $projet)
     {
-        //
+         // Validation des données
+         $request->validate([
+            'libelle' => 'required|string',
+            'description' => 'required|string',
+            'quantite_total' => 'required|string',
+            'montant_total' => 'required|string',
+            'etat_execution' => 'required|string',
+            'localisation' => 'required|string',
+            'date_demarrage' => 'required|date',
+            'date_fin_probable' => 'required|date',
+            'categorie' => 'required|string',
+            'taux_phyque' => 'required|string',
+            'taux_financier' => 'required|string',
+            'statut' => 'required|string',
+            'unite' => 'required|string',
+            'idSoc' => 'required|integer',
+            'idAnn' => 'required|integer',
+            'idNat' => 'required|integer',
+            'idBai' => 'required|integer',
+            'idEntr' => 'required|integer',
+            'composantes' => 'required|array',
+            'coordonnateur' => 'required|integer',
+        ]);
+
+        // Mettre à jour le projet
+        $projet->update($request->except(['composantes', 'coordonnateur']));
+
+        // Mettre à jour les composantes (many-to-many)
+        $projet->composantes()->sync($request->composantes);
+
+        // Mettre à jour le coordonnateur via la table pivot (many-to-many)
+        $projet->coordonnateurs()->sync([$request->coordonnateur]);
+
+        return redirect()->route('projets.index')->with("statut", "Le projet a été modifié avec succès");
+   
     }
 
     /**
@@ -79,8 +170,18 @@ class ProjetController extends Controller
      * @param  \App\Models\Projet  $projet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Projet $projet)
+    public function destroy($id)
     {
-        //
+        // Supprimer le projet
+        Projet::destroy($id);
+        return redirect()->route('projets.index')->with("statut", "Le projet a été supprimé avec succès");
+    
     }
+
+    public function getListe(Request $request)
+    {
+        $projets = Projet::all();
+        return view('projets.table')->with('projets', $projets);
+    }
+
 }
