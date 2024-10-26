@@ -3,13 +3,13 @@
         <tr>
             <th>N°</th>
             <th>Libellé</th>
-            <th>Description</th>
-            <th>Quantité</th>
+            <th>Puissance totale</th>
             <th>Montant Total</th>
-            <th>État d'Exécution</th>
+            <th>Taux physique</th>
+            <th>Taux financier</th>
             <th>Localisation</th>
-            <th>Composantes</th>
-            <th>Coordonnateur</th> {{-- Champ unique --}}
+            <th>Coordonnateur</th>
+            <th>Statut</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -18,15 +18,20 @@
         <tr>
             <td>{{ $index + 1 }}</td>
             <td>{{ $projet->libelle ?? '' }}</td>
-            <td>{{ $projet->description ?? ''}}</td>
             <td>{{ $projet->quantite_total ?? ''}}</td>
             <td>{{ $projet->montant_total ?? '' }}</td>
-            <td>{{ $projet->etat_execution ?? '' }}</td>
+            <td>{{ $projet->taux_physique ?? '' }}</td>
+            <td>{{ $projet->taux_financier ?? '' }}</td>
             <td>{{ $projet->localisation  ?? '' }}</td>
-            <td>{{ implode(', ', $projet->composantes->pluck('libelle')->toArray()) }}</td>
-            <td>{{ $projet->coordonnateurs->last()->nom ?? '' }} {{ $projet->coordonnateurs->last()->prenom ?? '' }}</td> 
+            <td>{{ $projet->dernierCoordonnateur()->nom ?? '' }} {{ $projet->dernierCoordonnateur()->prenom ?? '' }}</td>
+            {{-- <td>{{ $projet->coordonnateurs->last()->nom ?? '' }} {{ $projet->coordonnateurs->last()->prenom ?? '' }}</td> --}}
+            <td>{{ $projet->statut ?? '' }}</td> 
             <td>
                 <div class='btn-group'>
+                    <a href="{{ route('projets.show', $projet->id) }}" class="btn btn-info data-tooltip" data-tooltip="Voir le projet">
+                        <i class="fas fa-eye"></i>
+                    </a>
+
                     <a href="{{ route('projets.edit', $projet->id) }}" class="btn btn-info data-tooltip" data-tooltip="Modifier le projet">
                         <i class="fas fa-edit"></i>
                     </a>

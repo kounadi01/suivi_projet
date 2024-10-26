@@ -17,7 +17,7 @@ class CreateRealisationsTable extends Migration
             $table->id();
             $table->string('taux_financier');
             $table->string('taux_physique');
-            $table->string('etat_execution');
+            // $table->string('etat_execution');
             $table->string('difficultes');
             $table->string('action');
             $table->date('date_execution');

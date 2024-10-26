@@ -19,7 +19,8 @@ class CreateProjetsTable extends Migration
             $table->text('description');
             $table->string('quantite_total');
             $table->string('montant_total');
-            $table->string('etat_execution');
+            $table->string('difficultes')->nullable();
+            $table->string('action')->nullable();
             $table->string('localisation');
             $table->date('date_demarrage');
             $table->date('date_fin_probable');

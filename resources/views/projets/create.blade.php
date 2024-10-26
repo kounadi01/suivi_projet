@@ -72,9 +72,6 @@
                         required: true,
                         digits: true
                     },
-                    etat_execution: {
-                        required: true
-                    },
                     localisation: {
                         required: true
                     },
@@ -135,9 +132,6 @@
                     montant_total: {
                         required: "Veuillez fournir un montant total",
                         digits: "Veuillez entrer un nombre entier"
-                    },
-                    etat_execution: {
-                        required: "Veuillez fournir un état d'exécution"
                     },
                     localisation: {
                         required: "Veuillez fournir une localisation"

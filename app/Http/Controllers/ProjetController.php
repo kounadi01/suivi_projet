@@ -95,7 +95,19 @@ class ProjetController extends Controller
      */
     public function show(Projet $projet)
     {
-        //
+        try {
+            $societes = Societe::pluck('libelle', 'id');
+            $natures = Phase::pluck('libelle', 'id');
+            $bailleurs = Bailleur::selectRaw("CONCAT(nom, ' (', sigle, ')') as nom_complet, id")->pluck('nom_complet', 'id');
+            $entreprises = Fournisseur::pluck('nom', 'id');
+            $composantes = Composante::pluck('libelle', 'id');
+            $coordonnateurs = Coordonateur::selectRaw("CONCAT(nom, ' ', prenom) as nom_complet, id")->pluck('nom_complet', 'id');
+        } catch (\Exception $e) {
+            return redirect()->back();
+        }
+
+
+        return view('projets.show', compact('projet', 'societes', 'natures', 'bailleurs', 'entreprises', 'composantes', 'coordonnateurs'));
     }
 
     /**
@@ -137,8 +149,10 @@ class ProjetController extends Controller
             // Mettre à jour les composantes (many-to-many)
             $projet->composantes()->sync($request->composantes);
 
-            // Récupérer le coordonnateur actuel
-            $ancienCoordonnateur = $projet->coordonnateurs()->first();
+            // Récupérer le dernier coordonnateur actuel par date de début la plus récente
+            $ancienCoordonnateur = $projet->coordonnateurs()
+                ->orderByDesc('coordonnateur_projets.date_debut')
+                ->first();
 
             if ($ancienCoordonnateur) {
                 // Mettre à jour la date de fin de l'ancien coordonnateur dans la table pivot

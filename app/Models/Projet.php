@@ -38,13 +38,18 @@ class Projet extends Model
     public function coordonnateurs()
     {
         return $this->belongsToMany(Coordonateur::class, 'coordonnateur_projets', 'idProj', 'idCoord')
-                    ->withPivot('idCoord', 'idProj', 'date_debut', 'date_fin')
-                    ->withTimestamps();
+            ->withPivot('idCoord', 'idProj', 'date_debut', 'date_fin')
+            ->withTimestamps();
+    }
+
+    public function dernierCoordonnateur()
+    {
+        return $this->coordonnateurs()->orderByDesc('coordonnateur_projets.date_debut')->first();
     }
 
     public function composantes()
     {
         return $this->belongsToMany(Composante::class, 'composante_projets', 'idProj', 'idComp')
-                    ->withTimestamps();
+            ->withTimestamps();
     }
 }
