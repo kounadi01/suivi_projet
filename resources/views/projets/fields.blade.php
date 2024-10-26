@@ -1,7 +1,7 @@
 {!! Form::open(['route' => 'projets.store', 'class' => 'form-horizontal panel', 'id' => 'regForm']) !!}
 <div class="card card-primary card-outline mb-12">
     <div class="card-header">
-        <div class="card-title">Informations générale sur le projet</div>
+        <div class="card-title">Informations générales sur le projet</div>
     </div>
     <div class="card-body">
 

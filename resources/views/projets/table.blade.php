@@ -27,7 +27,7 @@
             <td>{{ $projet->montant_total ?? '' }}</td>
             <td>{{ $projet->localisation  ?? '' }}</td>
             <td>{{ implode(', ', $projet->composantes->pluck('libelle')->toArray()) }}</td>
-            <td>{{ $projet->coordonnateurs->last()->nom ?? '' }} {{ $projet->coordonnateurs->last()->prenom ?? '' }}</td> 
+            <td>{{ $projet->coordonnateurActuel()->nom ?? '' }} {{ $projet->coordonnateurActuel()->prenom ?? '' }}
             <td>{{ $projet->statut ?? ''}}</td>
             <td>{{ $projet->taux_financier ?? '' }}</td>
             <td>{{ $projet->taux_physique  ?? '' }}</td>

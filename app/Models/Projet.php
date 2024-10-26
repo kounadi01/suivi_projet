@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Projet extends Model
 {
@@ -46,5 +47,17 @@ class Projet extends Model
     {
         return $this->belongsToMany(Composante::class, 'composante_projets', 'idProj', 'idComp')
                     ->withTimestamps();
+    }
+    
+    public function coordonnateurActuel(){
+        $coordonnateur = DB::table('coordonnateur_projets')
+        ->join('coordonateurs', 'coordonnateur_projets.idCoord', '=', 'coordonateurs.id')
+        ->where('coordonnateur_projets.idProj', $this->id)
+        ->orderByDesc('coordonnateur_projets.created_at')
+        ->select('coordonateurs.*')
+        ->first();
+
+        //dd($coordonnateur);
+        return $coordonnateur ?? null ;
     }
 }
