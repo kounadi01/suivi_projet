@@ -11,8 +11,10 @@ use App\Models\Composante;
 use App\Models\Coordonateur;
 use App\Models\Fournisseur;
 use App\Models\Phase;
+use App\Models\Realisation;
 use App\Models\Societe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProjetController extends Controller
 {
@@ -23,9 +25,21 @@ class ProjetController extends Controller
      */
     public function index()
     {
+        if (isset($_GET['ae'])) {
+            $annee_id = $_GET['ae'];
+        } else {
+            $annee = AnneeExercice::anneeActive();
+            $annee_id = $annee->id;
+        }
+
+        if (isset($_GET['ty'])) {
+            $type = $_GET['ty'];
+        }else{
+            $type = "tout";
+        }
         $projets = Projet::all();
         //dd($projets);
-        return view('projets.index', ['projets' => $projets]);
+        return view('projets.index', ['projets' => $projets, 'ae' => $annee_id,'type' => $type]);
     }
 
     /**
@@ -81,6 +95,19 @@ class ProjetController extends Controller
                 ]
             ]);
 
+            if ($request->taux_financier != 0 || $request->taux_physique != 0) {
+                # code...
+                Realisation::create([
+                    'taux_financier'=>$request->taux_financier,
+                    'taux_physique'=>$request->taux_physique,
+                    'etat_execution'=>$request->statut,
+                    'difficultes'=>$request->difficultes,
+                    'action'=>$request->action,
+                    'idProj'=>$projet->id,
+                    'date_execution'=>date('Y-m-d')
+                ]);
+            }
+
             return redirect()->route('projets.index')->with("statut", "Le projet a été ajouté avec succès");
         }
 
@@ -96,6 +123,20 @@ class ProjetController extends Controller
     public function show(Projet $projet)
     {
         //
+        try {
+            // dd($projet->realisations);
+            $societes = Societe::pluck('libelle', 'id');
+            $natures = Phase::pluck('libelle', 'id');
+            $bailleurs = Bailleur::selectRaw("CONCAT(nom, ' (', sigle, ')') as nom_complet, id")->pluck('nom_complet', 'id');
+            $entreprises = Fournisseur::pluck('nom', 'id');
+            $composantes = Composante::pluck('libelle', 'id');
+            $coordonnateurs = Coordonateur::selectRaw("CONCAT(nom, ' ', prenom) as nom_complet, id")->pluck('nom_complet', 'id');
+        } catch (\Exception $e) {
+            return redirect()->back();
+        }
+
+
+        return view('projets.show', compact('projet', 'societes', 'natures', 'bailleurs', 'entreprises', 'composantes', 'coordonnateurs'));
     }
 
     /**
@@ -177,4 +218,47 @@ class ProjetController extends Controller
         $projets = Projet::all();
         return view('projets.table')->with('projets', $projets);
     }
+    public function evaluation($id)
+    {
+        $projet = Projet::where('id',$id)->get()->first();
+        return view('projets.evaluer', ['projet' => $projet]);
+    }
+
+    public function evaluer(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'taux_physique' => 'required',
+            'taux_financier' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'erreur' => 'Données incohérentes',
+            ], 422);
+        } else {
+            $input = $request->all();
+            //var_dump($input);
+            $projet = Projet::where('id',$request->id)->update([
+                "taux_physique" => $request->taux_physique,
+                "taux_financier" => $request->taux_financier,
+                "difficultes" => $request->difficultes,
+                "action" => $request->action,
+                "statut" => $request->statut
+            ]);
+            if($projet){
+                Realisation::create([
+                    'taux_financier'=>$request->taux_financier,
+                    'taux_physique'=>$request->taux_physique,
+                    'etat_execution'=>$request->statut,
+                    'difficultes'=>$request->difficultes,
+                    'action'=>$request->action,
+                    'idProj'=>$request->id,
+                    'date_execution'=>$request->date_execution
+                ]);
+            }
+
+            return redirect(route('projets.index'));
+        }
+    }
+
 }

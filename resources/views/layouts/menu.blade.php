@@ -89,19 +89,19 @@
                                         <p>Entreprises</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="{{ route('projets.index') }}" class="nav-link">
                                         <i class="nav-icon far fa-calendar-alt"></i>
                                         <p>Projets</p>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         @if(\App\Models\User::authUserProfil()->nom=='Administrateur' )
                         <li class="nav-item">
 
-                            <a href="{{ route('listeProduits.index') }}" 
-                            class="nav-link @if(request()->route()->getName() == 'listeProduits.index') active @endif">
+                            <a href="{{ route('projets.index') }}" 
+                            class="nav-link @if(request()->route()->getName() == 'projets.index') active @endif">
                                 <i class="far fa fa-cog nav-icon"></i>
                                 <p class="">
                                     Liste des projets

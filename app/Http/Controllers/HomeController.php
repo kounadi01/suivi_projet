@@ -62,12 +62,12 @@ class HomeController extends Controller
         if ($nbPrevisions != null){
             $montant_exterieure = $nbPrevisions->montant_total - $nbPrevisions->montant_local;
             $dataPrevision = [
-                ['Part locale', 'Part exterieure'],
+                ['Projet total', 'Projet terminé'],
                 [(int)$nbPrevisions->montant_local, (int)$montant_exterieure],
             ];
         }else{
             $dataPrevision = [
-                ['Part locale', 'Part exterieure'],
+                ['Projet total', 'Projet terminé'],
                 [0, 0],
             ];
         }
@@ -75,12 +75,12 @@ class HomeController extends Controller
         if ($nbRealisations != null){
             $montant_realisation = $nbRealisations->montant_total - $nbRealisations->montant_local;
             $dataRealisation = [
-                ['Part local', 'Part exterieure'],
+                ['Projet total', 'Projet en cours'],
                 [(int)$nbRealisations->montant_local, (int)$montant_realisation],
             ];
         }else{
             $dataRealisation = [
-                ['Part locale', 'Part exterieure'],
+                ['Projet total', 'Projet en cours'],
                 [0, 0],
             ];
         }

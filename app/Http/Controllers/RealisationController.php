@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Realisation;
 use App\Http\Requests\StoreRealisationRequest;
 use App\Http\Requests\UpdateRealisationRequest;
+use App\Models\Projet;
 
 class RealisationController extends Controller
 {
@@ -26,6 +27,8 @@ class RealisationController extends Controller
     public function create()
     {
         //
+        $projet = Projet::where('id',$_GET['id'])->get()->first();
+        return view('projets.evaluer', ['projet' => $projet]);
     }
 
     /**

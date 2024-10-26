@@ -20,8 +20,10 @@ use App\Http\Controllers\PlanApprovisionController;
 use App\Http\Controllers\PlanRealisationController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProjetController;
+use App\Http\Controllers\RealisationController;
 use App\Http\Controllers\ReponseController;
 use App\Http\Controllers\SocieteController;
+use App\Models\Realisation;
 
 //use Khill\Lavacharts\Lavacharts;
 
@@ -164,5 +166,11 @@ Route::get('/liste-coordonateurs', [CoordonateurController::class, "getListe"])-
 Route::resource('projets', ProjetController::class)->middleware(['auth']);
 Route::get('/supprimer-projet/{id}', [ProjetController::class, "destroy"])->name('projets.delete')->middleware(['auth']);
 Route::get('/liste-projets', [ProjetController::class, "getListe"])->name("projets.getListe")->middleware(['auth']);
+
+Route::resource('realisations', RealisationController::class)->middleware(['auth']);
+Route::get('/supprimer-realisation/{id}', [RealisationController::class, "destroy"])->name('realisations.delete')->middleware(['auth']);
+Route::get('/liste-realisations', [RealisationController::class, "getListe"])->name("realisations.getListe")->middleware(['auth']);
+Route::get('/projet-evaluation-get/{$id}', [ProjetController::class, "evaluation"])->name("projets.evaluation")->middleware(['auth']);
+Route::put('/projet-evaluation-post', [ProjetController::class, "evaluer"])->name("projets.evaluer")->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

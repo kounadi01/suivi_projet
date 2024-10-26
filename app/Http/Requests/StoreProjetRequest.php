@@ -28,7 +28,7 @@ class StoreProjetRequest extends FormRequest
             'description' => 'required|string',
             'quantite_total' => 'required|numeric',
             'montant_total' => 'required|integer',
-            'etat_execution' => 'required|string',
+            // 'etat_execution' => 'required|string',
             'localisation' => 'required|string',
             'date_demarrage' => 'required|date',
             'date_fin_probable' => 'required|date|after_or_equal:date_demarrage',

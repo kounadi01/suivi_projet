@@ -1,33 +1,62 @@
+@extends('layouts.app')
+@section('titre', 'Détails du projet')
+@section('breadcrumb')
+<li class="breadcrumb-item main-form">
+    <a>
+        Projets
+    </a>
+</li>
+@endsection
 
-    <div class="form-group">
-        <label for="nom_struct">Nom de la structure</label>
-        <input value= "{{ old('nom_struct') ?? $structure->nom_struct}}" type="number" name="nom_struct" readonly>
+@section('main')
+<div class="content">
+    <div class="row justify-content-center">
+        <div class="col-sm-10">
+            <div class="clearfix"></div>
+            <div class="card card-light">
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <div class="card-header text-center">Détails du projet</div>
+                <div class="card-body">
+                    @include('projets.fields_show')
+                </div>
+                <div class="card-footer row justify-content-center" style="float: right;">
+                    <a href="javascript:history.back()" class="btn btn-primary ml-0 mb-5">
+                        <span class="glyphicon glyphicon-circle-arrow-left"></span><i class="fa fa-arrow-left fa-fw"
+                            aria-hidden="true"></i>&nbsp; Retour
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <label for="sigle_struct">Sigle de la structure</label>
-        <input value= "{{ old('sigle_struct') ?? $structure->sigle_struct}}" type="number" name="sigle_struct" readonly>
-    </div>
+@endsection
 
-    <div class="form-group">
-        <label for="type_struct">Type de la structure</label><br>
-        <select name="type_struct" id="type_struct">
-            <option selected="selected" value="1"></option>
-            <option value="2">2</option>
-        </select>
-    </div>
+@section('scripts')
 
-    <div class="form-group">
-        <label for="tel_struct">Telephone de la structure</label>
-        <input value= "{{ old('tel_struct') ?? $structure->tel_struct}}" type="tel" name="tel_struct" readonly>
-    </div>
+<script>
+    $(function() {
+        //Initialize Select2 Elements
+        $('.select2').select2()
 
-    <div class="form-group">
-        <label for="email_struct">Email</label>
-        <input value= "{{ old('email_struct') ?? $structure->email_struct}}" type="date" name="email_struct" readonly>
-    </div>
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
 
-    <div class="form-group">
-        <label for="responsable_struct">Responsable de la structure</label>
-        <input value= "{{ old('responsable_struct') ?? $structure->responsable_struct}}" type="number" name="responsable_struct" readonly>
-    </div>
+    })
+</script>
+@endsection
