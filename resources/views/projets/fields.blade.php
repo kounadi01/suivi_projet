@@ -30,7 +30,7 @@
 
     <div class="row">
         <div class="required form-group col-md-6">
-            <label class="control-label" for="quantite_total">Quantité totale</label>
+            <label class="control-label" for="quantite_total">Puissance</label>
             {!! Form::number('quantite_total', null, ['class' => 'form-control', 'placeholder' => 'Quantité totale', 'id' => 'quantite_total']) !!}
         </div>
         <div class="required form-group col-md-6">
