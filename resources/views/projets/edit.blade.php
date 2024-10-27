@@ -51,10 +51,13 @@
                 description: { required: true },
                 quantite_total: { required: true, number: true },
                 montant_total: { required: true, digits: true },
+                etat_execution: { required: true },
                 localisation: { required: true },
                 date_demarrage: { required: true },
                 date_fin_probable: { required: true, greaterThan: "#date_demarrage" },
                 categorie: { required: true },
+                taux_physique: { required: true, number: true },
+                taux_financier: { required: true, number: true },
                 statut: { required: true },
                 unite: { required: true },
                 bailleur: { required: true },
@@ -69,12 +72,15 @@
                 description: { required: "Veuillez fournir une description" },
                 quantite_total: { required: "Veuillez fournir une quantité totale", number: "Veuillez entrer un nombre valide" },
                 montant_total: { required: "Veuillez fournir un montant total", digits: "Veuillez entrer un nombre entier" },
+                etat_execution: { required: "Veuillez fournir un état d'exécution" },
                 localisation: { required: "Veuillez fournir une localisation" },
                 coordonnateur: { required: "Veuillez sélectionner un coordonnateur" },
                 'composantes[]': { required: "Veuillez sélectionner au moins une composante" },
                 date_demarrage: { required: "Veuillez fournir une date de démarrage" },
                 date_fin_probable: { required: "Veuillez fournir une date de fin probable", greaterThan: "La date de fin probable doit être supérieure ou égale à la date de démarrage." },
                 categorie: { required: "Veuillez fournir une catégorie" },
+                taux_physique: { required: "Veuillez fournir le taux physique", number: "Veuillez entrer un nombre valide" },
+                taux_financier: { required: "Veuillez fournir le taux financier", number: "Veuillez entrer un nombre valide" },
                 statut: { required: "Veuillez fournir un statut" },
                 unite: { required: "Veuillez fournir une unité" },
                 bailleur: { required: "Veuillez sélectionner un bailleur" },
@@ -104,4 +110,6 @@
 
     })
 </script>
+
+
 @endsection
